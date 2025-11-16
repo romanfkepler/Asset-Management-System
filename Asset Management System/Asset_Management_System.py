@@ -33,11 +33,11 @@ class MyGUI:
         conn.commit()
 
         # insert test entry
-        cur.execute('''INSERT INTO Assets(AssetID, AssetName, Condition, Available, Cost, Manufacturer,
-        Model, SerialNumber, PurchaseDate, Vendor, Site) 
-        VALUES(1, "Test Entry", "Operational", "Checked In", 10000, "Buildin' Boys", "The Wrangler", 
-        "1093S2FF", 01011999, "Facebook Marketplace", "HSV")''')
-        conn.commit()
+        # cur.execute('''INSERT INTO Assets(AssetID, AssetName, Condition, Available, Cost, Manufacturer,
+        # Model, SerialNumber, PurchaseDate, Vendor, Site) 
+        # VALUES(1, "Test Entry", "Operational", "Checked In", 10000, "Buildin' Boys", "The Wrangler", 
+        # "1093S2FF", 01011999, "Facebook Marketplace", "HSV")''')
+        # conn.commit()
                 
         # main window widget
         self.main_window = tk.Tk()
