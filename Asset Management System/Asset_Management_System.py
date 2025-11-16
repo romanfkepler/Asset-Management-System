@@ -10,6 +10,34 @@ class MyGUI:
         # connect to database
         conn = sql.connect('assets.db')
         cur = conn.cursor()
+
+        # -=-=-=-=- TABLES -=-=-=-=-=-
+
+        # create Assets table
+        cur.execute('''CREATE TABLE IF NOT EXIST Assets(AssetID INTEGER PRIMARY KEY NOT NULL, AssetName TEXT,
+        Condition TEXT, Available TEXT, Cost REAL, Manufacturer TEXT, Model TEXT, SerialNumber TEXT,
+        PurchaseDate INTEGER, Vendor TEXT, Site TEXT,
+        FOREIGN KEY(Condition) REFERENCES AssetLog(Condition))''')
+        conn.commit()
+
+        # create Asset Log table
+        cur.execute('''CREATE TABLE IF NOT EXIST AssetLog(AssetID INTEGER PRIMARY KEY NOT NULL, AssetName TEXT,
+        LogDate INTEGER, LogTime INTEGER, Issue TEXT, Condition TEXT,
+        FOREIGN KEY(AssetID) REFERENCES Assets(AssetID),
+        FOREIGN KEY(AssetName) REFERENCES Assets(AssetName))''')
+        conn.commit()
+
+        # create Users table
+        cur.execute('''CREATE TABLE IF NOT EXIST Users(UniqueUsername TEXT PRIMARY KEY NOT NULL, FNameLName TEXT,
+        Password TEXT, Authority TEXT)''')
+        conn.commit()
+
+        # insert test entry
+        cur.execute('''INSERT INTO Assets(AssetID, AssetName, Condition, Available, Cost, Manufacturer,
+        Model, SerialNumber, PurchaseDate, Vendor, Site) 
+        VALUES(1, "Test Entry", "Operational", "Checked In", 10000, "Buildin' Boys", "The Wrangler", 
+        "1093S2FF", 01011999, "Facebook Marketplace", "HSV")''')
+        conn.commit()
                 
         # main window widget
         self.main_window = tk.Tk()
