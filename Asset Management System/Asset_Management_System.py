@@ -38,6 +38,13 @@ class MyGUI:
         # VALUES(1, "Test Entry", "Operational", "Checked In", 10000, "Buildin' Boys", "The Wrangler", 
         # "1093S2FF", 01011999, "Facebook Marketplace", "HSV")''')
         # conn.commit()
+
+        # trying to look at the table
+        cur.execute('SELECT * FROM Assets')
+        results = cur.fetchall()
+
+        for row in results:
+            print(f'{row[0]:30} {row[1]:5}')
                 
         # main window widget
         self.main_window = tk.Tk()
