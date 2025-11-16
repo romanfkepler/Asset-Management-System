@@ -14,21 +14,21 @@ class MyGUI:
         # -=-=-=-=- TABLES -=-=-=-=-=-
 
         # create Assets table
-        cur.execute('''CREATE TABLE IF NOT EXIST Assets(AssetID INTEGER PRIMARY KEY NOT NULL, AssetName TEXT,
+        cur.execute('''CREATE TABLE IF NOT EXISTS Assets(AssetID INTEGER PRIMARY KEY NOT NULL, AssetName TEXT,
         Condition TEXT, Available TEXT, Cost REAL, Manufacturer TEXT, Model TEXT, SerialNumber TEXT,
         PurchaseDate INTEGER, Vendor TEXT, Site TEXT,
         FOREIGN KEY(Condition) REFERENCES AssetLog(Condition))''')
         conn.commit()
 
         # create Asset Log table
-        cur.execute('''CREATE TABLE IF NOT EXIST AssetLog(AssetID INTEGER PRIMARY KEY NOT NULL, AssetName TEXT,
+        cur.execute('''CREATE TABLE IF NOT EXISTS AssetLog(AssetID INTEGER PRIMARY KEY NOT NULL, AssetName TEXT,
         LogDate INTEGER, LogTime INTEGER, Issue TEXT, Condition TEXT,
         FOREIGN KEY(AssetID) REFERENCES Assets(AssetID),
         FOREIGN KEY(AssetName) REFERENCES Assets(AssetName))''')
         conn.commit()
 
         # create Users table
-        cur.execute('''CREATE TABLE IF NOT EXIST Users(UniqueUsername TEXT PRIMARY KEY NOT NULL, FNameLName TEXT,
+        cur.execute('''CREATE TABLE IF NOT EXISTS Users(UniqueUsername TEXT PRIMARY KEY NOT NULL, FNameLName TEXT,
         Password TEXT, Authority TEXT)''')
         conn.commit()
 
