@@ -12,7 +12,7 @@ class MyGUI:
         cur = conn.cursor()
         cur.execute("PRAGMA foreign_keys = ON")
 
-        # -=-=-=-=- TABLES -=-=-=-=-=-
+        # -=-=-=-=- TABLES -=-=-=-=-
 
         # create Assets table
         cur.execute('''CREATE TABLE IF NOT EXISTS Assets(
@@ -72,12 +72,30 @@ class MyGUI:
         
         conn.commit()
         conn.close()
+
+        # -=-=-=-=- TKINTER -=-=-=-=-
                 
         # main window widget
         self.main_window = tk.Tk()
         
         # display title
-        self.main_window.title('Asset Management System')
+        self.main_window.title('Login Form')
+
+        # username
+        self.usernameFrame = tk.Frame()
+        self.usernameFrame.pack(padx=10,
+                           pady=10)
+
+        self.usernameLabel = tk.Label(self.usernameFrame,
+                                      text='Username:   ')
+        self.usernameLabel.pack(side='left')
+
+        self.usernameEntry = tk.Entry(self.usernameFrame)
+        self.usernameEntry.pack(side='left')
+        
+
+
+        
 
         # enter tkinter main loop
         tk.mainloop()
