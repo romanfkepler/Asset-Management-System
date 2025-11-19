@@ -10,26 +10,50 @@ class MyGUI:
         # connect to database
         conn = sql.connect('assets.db')
         cur = conn.cursor()
+        cur.execute("PRAGMA foreign_keys = ON")
 
         # -=-=-=-=- TABLES -=-=-=-=-=-
 
         # create Assets table
-        cur.execute('''CREATE TABLE IF NOT EXISTS Assets(AssetID INTEGER PRIMARY KEY NOT NULL, AssetName TEXT,
-        Condition TEXT, Available TEXT, Cost REAL, Manufacturer TEXT, Model TEXT, SerialNumber TEXT,
-        PurchaseDate INTEGER, Vendor TEXT, Site TEXT,
-        FOREIGN KEY(Condition) REFERENCES AssetLog(Condition))''')
+        cur.execute('''CREATE TABLE IF NOT EXISTS Assets(
+            AssetID INTEGER PRIMARY KEY NOT NULL, 
+            AssetName TEXT,
+            Condition TEXT, 
+            Available TEXT, 
+            Cost REAL, 
+            Manufacturer TEXT, 
+            Model TEXT, 
+            SerialNumber TEXT,
+            PurchaseDate INTEGER, 
+            Vendor TEXT, 
+            Site TEXT,
+            FOREIGN KEY(Condition) REFERENCES AssetLog(Condition)
+            )
+            ''')
         conn.commit()
 
         # create Asset Log table
-        cur.execute('''CREATE TABLE IF NOT EXISTS AssetLog(AssetID INTEGER PRIMARY KEY NOT NULL, AssetName TEXT,
-        LogDate INTEGER, LogTime INTEGER, Issue TEXT, Condition TEXT,
-        FOREIGN KEY(AssetID) REFERENCES Assets(AssetID),
-        FOREIGN KEY(AssetName) REFERENCES Assets(AssetName))''')
+        cur.execute('''CREATE TABLE IF NOT EXISTS AssetLog(
+            AssetID INTEGER PRIMARY KEY NOT NULL, 
+            AssetName TEXT,
+            LogDate INTEGER, 
+            LogTime INTEGER, 
+            Issue TEXT, 
+            Condition TEXT,
+            FOREIGN KEY(AssetID) REFERENCES Assets(AssetID),
+            FOREIGN KEY(AssetName) REFERENCES Assets(AssetName)
+            )
+            ''')
         conn.commit()
 
         # create Users table
-        cur.execute('''CREATE TABLE IF NOT EXISTS Users(UniqueUsername TEXT PRIMARY KEY NOT NULL, FNameLName TEXT,
-        Password TEXT, Authority TEXT)''')
+        cur.execute('''CREATE TABLE IF NOT EXISTS Users(
+        UniqueUsername TEXT PRIMARY KEY NOT NULL, 
+        FNameLName TEXT,
+        Password TEXT, 
+        Authority TEXT
+        )
+        ''')
         conn.commit()
 
         # insert test entry
@@ -44,7 +68,10 @@ class MyGUI:
         results = cur.fetchall()
 
         for row in results:
-            print(f'{row[0]:30} {row[1]:5}')
+            print(row)
+        
+        conn.commit()
+        conn.close()
                 
         # main window widget
         self.main_window = tk.Tk()
@@ -55,8 +82,7 @@ class MyGUI:
         # enter tkinter main loop
         tk.mainloop()
 
-        conn.commit()
-        conn.close()
+
 
 # create instance of MyGUI class
 if __name__ == '__main__':
