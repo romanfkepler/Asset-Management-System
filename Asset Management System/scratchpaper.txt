@@ -1,0 +1,49 @@
+
+
+
+                # login frame
+        frame = tk.Frame()
+        frame.columnconfigure(0, weight=0)
+        frame.columnconfigure(0, weight=2)
+
+        # row 1 username
+        tk.Label(frame, text='Username: ').grid(column=0, row=0, sticky=tk.W)
+        username = tk.Entry(frame, width=30)
+        username.focus()
+        username.grid(column=1, row=0, sticky=tk.W)
+
+        #row 2 password
+        tk.Label(frame, text='Password: ').grid(column=0, row=1, sticky=tk.W)
+        password = tk.Entry(frame, width=30)
+        password.grid(column=1, row=1, sticky=tk.W)
+
+
+                # username
+        self.usernameFrame = tk.Frame(self.main_window,
+                                      padx=10,
+                                      pady=10)
+        # self.usernameFrame.pack(padx=10,pady=10)
+
+        self.usernameLabel = tk.Label(self.usernameFrame,
+                                      text='Username:   ')
+        self.usernameLabel.pack(side='left')
+
+        self.usernameEntry = tk.Entry(self.usernameFrame)
+        self.usernameEntry.pack(side='left')
+
+        self.usernameFrame.pack()
+
+        # password
+        self.passwordFrame = tk.Frame(self.main_window,
+                                      padx=10,
+                                      pady=10)
+       # self.passwordFrame()
+
+        self.passwordLabel = tk.Label(self.passwordFrame,
+                                      text='Password:   ')
+        self.passwordLabel.pack(side='left')
+
+        self.passwordEntry = tk.Entry(self.usernameFrame)
+        self.passwordEntry.pack(side='left')
+
+        self.passwordFrame.pack()

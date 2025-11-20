@@ -3,8 +3,12 @@
 
 import tkinter as tk
 import sqlite3 as sql
+from tkinter import *
 
 class MyGUI:
+    def tryLogin(self):
+        pass
+
     def __init__(self):
 
         # connect to database
@@ -76,26 +80,56 @@ class MyGUI:
         # -=-=-=-=- TKINTER -=-=-=-=-
                 
         # main window widget
-        self.main_window = tk.Tk()
+        self.loginWindow = Tk()
         
         # display title
-        self.main_window.title('Login Form')
+        self.loginWindow.title('Login Form')
 
-        # username
-        self.usernameFrame = tk.Frame()
-        self.usernameFrame.pack(padx=10,
-                           pady=10)
+        # create frames
+        self.usernameFrame = tk.Frame(self.loginWindow)
+        self.passwordFrame = tk.Frame(self.loginWindow)
+        self.buttonsFrame = tk.Frame(self.loginWindow)
 
+        # username frame
         self.usernameLabel = tk.Label(self.usernameFrame,
-                                      text='Username:   ')
-        self.usernameLabel.pack(side='left')
-
+                                      text='Username:')
+        self.usernameLabel.pack(side='left', 
+                                pady=(5, 0), 
+                                padx=(5, 10)
+                                )
         self.usernameEntry = tk.Entry(self.usernameFrame)
         self.usernameEntry.pack(side='left')
-        
 
+        # password frame
+        self.passwordLabel = tk.Label(self.passwordFrame,
+                                      text='Password:')
+        self.passwordLabel.pack(side='left', 
+                                pady=(5, 0), 
+                                padx=(5, 10)
+                                )
+        self.passwordEntry = tk.Entry(self.passwordFrame)
+        self.passwordEntry.pack(side='left')
 
-        
+        # buttons frame
+        self.btnLogin = tk.Button(self.buttonsFrame,
+                                  text='Log In',
+                                  command=self.tryLogin)
+        self.btnLogin.pack(side='left',
+                           pady=(5, 5),
+                           padx=(5, 10)
+                           )
+        self.btnCancel = tk.Button(self.buttonsFrame,
+                                   text='Cancel',
+                                   command=self.loginWindow.destroy)
+        self.btnCancel.pack(side='left',
+                            pady=(5, 5),
+                            padx=(5, 10)
+                            )
+
+        # pack frames
+        self.usernameFrame.pack()
+        self.passwordFrame.pack()
+        self.buttonsFrame.pack()
 
         # enter tkinter main loop
         tk.mainloop()
