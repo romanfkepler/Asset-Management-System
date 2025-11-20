@@ -1,6 +1,7 @@
 # ASSET MANAGEMENT SYSTEM
 # Roman Kepler | Wesley Walling | Emily Owens | Nick Marsh
 
+from ast import Break
 import tkinter as tk
 import sqlite3 as sql
 from tkinter import *
@@ -11,16 +12,27 @@ class MyGUI:
         cur = conn.cursor()
         cur.execute("PRAGMA foreign_keys = ON")
 
-        self.tryUsername = str(self.usernameEntry.get())
-        self.tryPassword = str(self.passwordEntry.get())
+        tryUsername = str(self.usernameEntry.get())
+        tryPassword = str(self.passwordEntry.get())
 
         cur.execute('SELECT UniqueUsername, Password FROM Users WHERE UniqueUsername == ? AND Password == ?', (tryUsername, tryPassword))
         results = cur.fetchall()
+        for row in results:
+            print(row)
 
-        if results is None:
-            pass
+        conn.commit()
+        conn.close()
+
+        if results:
+            print("Login successful.")
+            tryUsername = None
+            tryPassword = None
+            return
         else:
-            pass
+            print("Username or password incorrect.")
+            tryUsername = None
+            tryPassword = None
+            return
 
     def assetsView(self):
         pass
