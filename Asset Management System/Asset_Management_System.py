@@ -7,7 +7,28 @@ from tkinter import *
 
 class MyGUI:
     def tryLogin(self):
+        conn = sql.connect('assets.db')
+        cur = conn.cursor()
+        cur.execute("PRAGMA foreign_keys = ON")
+
+        self.tryUsername = str(self.usernameEntry.get())
+        self.tryPassword = str(self.passwordEntry.get())
+
+        cur.execute('SELECT UniqueUsername, Password FROM Users WHERE UniqueUsername == ? AND Password == ?', (tryUsername, tryPassword))
+        results = cur.fetchall()
+
+        if results is None:
+            pass
+        else:
+            pass
+
+    def assetsView(self):
         pass
+
+    def usersView(self):
+        pass
+
+
 
     def __init__(self):
 
@@ -67,8 +88,19 @@ class MyGUI:
         # "1093S2FF", 01011999, "Facebook Marketplace", "HSV")''')
         # conn.commit()
 
+        # insert test user
+        # cur.execute('''INSERT INTO Users(UniqueUsername, FNameLName, Password, Authority)
+        # VALUES("JimmyJamboree", "Jimmy Jameson", "1234Froggy97", "Admin")''')
+        # conn.commit()
+
         # trying to look at the table
         cur.execute('SELECT * FROM Assets')
+        results = cur.fetchall()
+
+        for row in results:
+            print(row)
+
+        cur.execute('SELECT * FROM Users')
         results = cur.fetchall()
 
         for row in results:
