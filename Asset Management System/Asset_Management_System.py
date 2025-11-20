@@ -1,12 +1,22 @@
 # ASSET MANAGEMENT SYSTEM
 # Roman Kepler | Wesley Walling | Emily Owens | Nick Marsh
 
-from ast import Break
 import tkinter as tk
 import sqlite3 as sql
 from tkinter import *
+from tkinter.ttk import *
 
 class MyGUI:
+    def assetsView(self):
+        assetsWindow = Toplevel(self.loginWindow)
+        assetsWindow.title('Asset Management Database')
+        assetsWindow.geometry('300x300')
+        
+
+    def usersView(self):
+        pass
+
+    # -=-=-=-=- TRY LOGIN -=-=-=-=-
     def tryLogin(self):
         conn = sql.connect('assets.db')
         cur = conn.cursor()
@@ -27,6 +37,8 @@ class MyGUI:
             print("Login successful.")
             tryUsername = None
             tryPassword = None
+            self.loginWindow.withdraw()
+            self.assetsView()
             return
         else:
             print("Username or password incorrect.")
@@ -34,12 +46,7 @@ class MyGUI:
             tryPassword = None
             return
 
-    def assetsView(self):
-        pass
-
-    def usersView(self):
-        pass
-
+   
 
 
     def __init__(self):
